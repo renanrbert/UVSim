@@ -20,27 +20,24 @@ Automatically compares **experimental UV-Vis spectra** with **TD-DFT calculation
 
 ### **Experimental (.csv/.dat)**
 *2 columns only: energy in eV, normalized intensity*
+*No title row*
+Don't forget to apply the Jacobian conversion for experimental data! --> https://doi.org/10.1021/jz401508t
 
-Energy(eV), Intensity
-1.65, 0.02
-1.72, 0.15
-1.89, 0.87
 ...
 
 ### **Theoretical (.stk files)**
 *Energy in cm⁻¹, oscillator strength (f)*
+*No title row*
 
-30000, 0.0012
-32000, 0.0456
 ... 
 
 
 ## ⚙️ **Algorithm**
 Optimization range = experimental data range
 
-Step 1: Fix width=0.053 eV, optimize shift [-1.5, +1.5 eV]
+Step 1: Fix width=0.053 eV, optimize shift [-1.5, +1.5 eV] (The shift value **will not** be greater than this values!)
 
-Step 2: Fix optimized shift, optimize width [0, 0.5 eV]
+Step 2: Fix optimized shift, optimize width [0, 0.5 eV] (The width value **will not** be greater than this values!)
 
 Similarity = ∫f·g / √(∫f² · ∫g²) [0-100%]
 
