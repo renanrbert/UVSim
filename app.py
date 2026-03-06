@@ -302,7 +302,8 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
 
 st.markdown("""
 ---
-**UV-Vis TD-DFT Analyzer** • *Built for computational chemists*  
+**UV-Vis Similarity Calculator** • *Built from computational chemiststo to all chemists!*  
+Check our work that used this algorithm: https://doi.org/10.1021/acs.jpca.5c06391 
 [GitHub](https://github.com/renanrbert/UVSim) • Optimized for ORCA .stk outputs
 """)
 
