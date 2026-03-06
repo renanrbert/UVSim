@@ -109,7 +109,7 @@ def normalize_transitions_in_plot_range(stk_data, plot_emin, plot_emax):
 
 # ==== STREAMLIT INTERFACE ====
 
-st.title("UV-Vis TD-DFT Spectrum Analyzer")
+st.title("UV-Vis Similarity Calculator")
 
 st.markdown("""
 **Upload your experimental UV-Vis spectrum (.csv/.dat) and theoretical TD-DFT transitions (.stk files)**  
@@ -121,10 +121,10 @@ col1, col2 = st.columns(2)
 plot_emin = col1.number_input("plot-emin (eV)", value=1.5, step=0.1, min_value=0.1)
 plot_emax = col2.number_input("plot-emax (eV)", value=5.0, step=0.1, min_value=0.1)
 
-col1, col2 = st.columns([2, 1])
-with col1:
-    st.header("📁 File Upload")
-    exp_file = st.file_uploader(
+
+st.header("📁 File Upload")
+
+exp_file = st.file_uploader(
         "Experimental spectrum (.csv/.dat - 2 columns: Energy eV, Intensity)",
         type=["csv", "dat", "txt"],
         help="Format: energy(eV),intensity per line"
