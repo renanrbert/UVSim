@@ -129,8 +129,8 @@ with col1:
         type=["csv", "dat", "txt"],
         help="Format: energy(eV),intensity per line"
     )
-with col2:
-    st.info("**.stk format:**\nenergy(cm⁻¹),oscillator_strength")
+#with col2:
+#    st.info("**.stk format:**\nenergy(cm⁻¹),oscillator_strength")
 
 stk_files = st.file_uploader(
     "Theoretical TD-DFT file (.stk)",
