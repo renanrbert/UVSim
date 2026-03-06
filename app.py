@@ -126,7 +126,7 @@ st.header("📁 File Upload")
 
 exp_file = st.file_uploader(
         "Experimental spectrum (.csv/.dat - 2 columns: Energy eV, Intensity)",
-        type=["csv", "dat", "txt"],
+        type=["csv", "dat"],
         help="Format: energy(eV),intensity per line"
     )
 
