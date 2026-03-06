@@ -171,6 +171,10 @@ st.markdown("""
 *Automatically optimizes Gaussian broadening and computes similarity values*
 """)
 
+# HELP BUTTON
+with st.expander("❓ Help - How to use", expanded=False):
+    st.markdown(HELP_TEXT)
+
 # Plot emin/emax inputs VISIBLE IN MAIN AREA
 col1, col2 = st.columns(2)
 plot_emin = col1.number_input("plot-emin (eV)", value=1.5, step=0.1, min_value=0.1)
