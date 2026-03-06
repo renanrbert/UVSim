@@ -9,33 +9,31 @@ from scipy.optimize import minimize
 
 # ==== HELP TEXT (COLLAPSIBLE) ====
 HELP_TEXT = """
-# 🔬 UV-Vis TD-DFT Spectrum Analyzer - How it works
+# UV-Vis Similarity Calculator - How it works
 
 ## 🎯 **What this tool does**
 Automatically compares **experimental UV-Vis spectra** with **TD-DFT calculations** by:
 1. Optimizing Gaussian broadening parameters (shift, width)
-2. Computing quantitative **similarity scores** between spectra
-3. Generating publication-ready overlay plots
+2. Computing quantitative **similarity values** between spectra
 
 ## 📁 **File Formats**
 
 ### **Experimental (.csv/.dat)**
+*2 columns only: energy in eV, normalized intensity*
+
 Energy(eV), Intensity
 1.65, 0.02
 1.72, 0.15
 1.89, 0.87
 ...
 
-text
-*2 columns only: energy in eV, normalized intensity*
-
 ### **Theoretical (.stk files)**
+*Energy in cm⁻¹, oscillator strength (f)*
+
 30000, 0.0012
 32000, 0.0456
-...
+... 
 
-text
-*Energy in cm⁻¹, oscillator strength (f)*
 
 ## ⚙️ **Algorithm**
 Optimization range = experimental data range
@@ -46,18 +44,16 @@ Step 2: Fix optimized shift, optimize width [0, 0.5 eV]
 
 Similarity = ∫f·g / √(∫f² · ∫g²) [0-100%]
 
-text
 
 ## 📊 **plot-emin/emax**
-- **Controls plot window** (sticks + envelope visible range)
-- **Does NOT affect** optimization (uses full experimental range)
-- Default: 1.5-5.0 eV (typical MLCT range)
+- **Controls plot window** 
+- **Does NOT affect** optimization 
+- Default: 1.5-5.0 eV 
 
 ## 💡 **Tips**
 - ✅ Works with ORCA/Gaussian .stk outputs
 - ✅ Multiple functionals = side-by-side comparison
 - ✅ Higher similarity % = better functional match
-- ⚠️ Uploads temporary (per session)
 
 **Perfect for DFT functional benchmarking!**
 """
