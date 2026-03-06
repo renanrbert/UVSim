@@ -127,6 +127,7 @@ with col1:
     exp_file = st.file_uploader(
         "Experimental spectrum (.csv/.dat - 2 columns: Energy (eV), Intensity)",
         type=["csv", "dat", "txt"],
+        accept_multiple_files=True,
         help="Format: energy(eV),intensity per line"
     )
 #with col2:
