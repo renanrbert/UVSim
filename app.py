@@ -239,7 +239,5 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
 st.markdown("""
 ---
 **UV-Vis TD-DFT Analyzer** • *Built for computational chemists*  
-[GitHub](https://github.com/renanrbert/UVSim) • Optimized for ORCA/Gaussian .stk outputs
+[GitHub](https://github.com/YOUR_USERNAME/uvvis-tddft-analyzer) • Optimized for ORCA/Gaussian .stk outputs
 """)
-
-
