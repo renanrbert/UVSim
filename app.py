@@ -43,7 +43,8 @@ def optimize_parameters_original(exp_data, stk_data, exp_emin, exp_emax):
     """EXACTLY as in original code: two-step Nelder-Mead optimization"""
     def objective(params):
         shift, width = params
-        x, y = create_spectrum(stk_data, exp_emin, emax, shift=shift, width=width)
+        # ✅ CORRIGIDO: exp_emin, exp_emax (não plot_emax)
+        x, y = create_spectrum(stk_data, exp_emin, exp_emax, shift=shift, width=width)
         return -calculate_similarity_in_range(exp_data, x, y, exp_emin, exp_emax)
 
     initial_guess = [0.0, 0.052651242]
@@ -116,7 +117,7 @@ st.markdown("""
 *Automatically optimizes Gaussian broadening and computes similarity scores*
 """)
 
-# Plot emin/emax inputs MOVED TO MAIN AREA (visible like original version)
+# Plot emin/emax inputs VISIBLE IN MAIN AREA
 col1, col2 = st.columns(2)
 plot_emin = col1.number_input("plot-emin (eV)", value=1.5, step=0.1, min_value=0.1)
 plot_emax = col2.number_input("plot-emax (eV)", value=5.0, step=0.1, min_value=0.1)
@@ -171,10 +172,10 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
                 stk_data = np.loadtxt(stk_file)
                 st.info(f"Processing {name}: {stk_data.shape[0]} transitions")
 
-                # Optimize parameters
+                # ✅ CORRIGIDO: usa exp_emin, exp_emax para otimização
                 shift_opt, width_opt = optimize_parameters_original(exp_data, stk_data, exp_emin, exp_emax)
 
-                # Optimized spectrum
+                # Optimized spectrum (usa range experimental para otimização)
                 x_opt, y_opt = create_spectrum(stk_data, exp_emin, exp_emax, shift=shift_opt, width=width_opt)
                 similarity = calculate_similarity_in_range(exp_data, x_opt, y_opt, exp_emin, exp_emax)
                 similarity_percent = similarity * 100
@@ -186,19 +187,23 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
                     "Similarity (%)": f"{similarity_percent:.1f}"
                 })
 
-                # Plot
+                # Plot (usa plot_emin, plot_emax para visualização)
                 ax = axs[idx]
                 energy_eV, intensity_norm = normalize_transitions_in_plot_range(stk_data, plot_emin, plot_emax)
                 plot_mask = (energy_eV >= plot_emin) & (energy_eV <= plot_emax)
                 plot_energy = energy_eV[plot_mask]
                 plot_intensity = intensity_norm[plot_mask]
 
-                # Theoretical sticks + envelope
+                # Theoretical sticks + envelope (LIMITADO ao plot range)
                 ax.vlines(plot_energy, 0, plot_intensity, color='red', linewidth=1, alpha=0.7)
-                ax.plot(x_opt, y_opt, 'r-', linewidth=2, label=f'{name}\nS={similarity_percent:.1f}%')
+                
+                # Envelope otimizado (limitado ao plot range)
+                mask_opt = (x_opt >= plot_emin) & (x_opt <= plot_emax)
+                ax.plot(x_opt[mask_opt], y_opt[mask_opt], 'r-', linewidth=2, label=f'{name}\nS={similarity_percent:.1f}%')
 
-                # Experimental
-                ax.plot(exp_data[:, 0], exp_data[:, 1], 'k-', linewidth=2, label='Experimental')
+                # Experimental (limitado ao plot range)
+                mask_exp = (exp_data[:, 0] >= plot_emin) & (exp_data[:, 0] <= plot_emax)
+                ax.plot(exp_data[mask_exp, 0], exp_data[mask_exp, 1], 'k-', linewidth=2, label='Experimental')
 
                 ax.set_xlabel('Energy (eV)', fontsize=11)
                 ax.set_ylabel('Normalized Intensity', fontsize=11)
@@ -221,6 +226,9 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
     # Results table
     if results:
         results_df = pd.DataFrame(results)
+        results_df['Similarity (%)'] = pd.to_numeric(results_df['Similarity (%)'])
+        results_df['Shift (eV)'] = pd.to_numeric(results_df['Shift (eV)'])
+        results_df['Width (eV)'] = pd.to_numeric(results_df['Width (eV)'])
         results_df = results_df.sort_values('Similarity (%)', ascending=False)
         
         st.markdown("## 📈 Results Table (Ranked by Similarity)")
@@ -241,3 +249,4 @@ st.markdown("""
 **UV-Vis TD-DFT Analyzer** • *Built for computational chemists*  
 [GitHub](https://github.com/YOUR_USERNAME/uvvis-tddft-analyzer) • Optimized for ORCA/Gaussian .stk outputs
 """)
+
