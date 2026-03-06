@@ -113,7 +113,7 @@ st.title("UV-Vis Similarity Calculator")
 
 st.markdown("""
 **Upload your experimental UV-Vis spectrum (.csv/.dat) and theoretical TD-DFT transitions (.stk files)**  
-*Automatically optimizes Gaussian broadening and computes similarity scores*
+*Automatically optimizes Gaussian broadening and computes similarity values*
 """)
 
 # Plot emin/emax inputs VISIBLE IN MAIN AREA
@@ -244,6 +244,6 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
 st.markdown("""
 ---
 **UV-Vis TD-DFT Analyzer** • *Built for computational chemists*  
-[GitHub](https://github.com/YOUR_USERNAME/uvvis-tddft-analyzer) • Optimized for ORCA/Gaussian .stk outputs
+[GitHub](https://github.com/renanrbert/UVSim) • Optimized for ORCA .stk outputs
 """)
 
