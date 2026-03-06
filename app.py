@@ -302,7 +302,7 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
 
 st.markdown("""
 ---
-**UV-Vis Similarity Calculator** • *Built from computational chemiststo to all chemists!* 
+**UV-Vis Similarity Calculator** • *Built from computational chemists to to all chemists!* 
 
 Creators: Renan Ribeiro Bertoloni and Antonio Gustavo Sampaio de Oliveira Filho
 
