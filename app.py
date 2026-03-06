@@ -43,7 +43,7 @@ def optimize_parameters_original(exp_data, stk_data, exp_emin, exp_emax):
     """EXACTLY as in original code: two-step Nelder-Mead optimization"""
     def objective(params):
         shift, width = params
-        x, y = create_spectrum(stk_data, exp_emin, exp_emax, shift=shift, width=width)
+        x, y = create_spectrum(stk_data, exp_emin, emax, shift=shift, width=width)
         return -calculate_similarity_in_range(exp_data, x, y, exp_emin, exp_emax)
 
     initial_guess = [0.0, 0.052651242]
@@ -116,9 +116,10 @@ st.markdown("""
 *Automatically optimizes Gaussian broadening and computes similarity scores*
 """)
 
-st.sidebar.header("📊 Plot Settings")
-plot_emin = st.sidebar.number_input("Plot min (eV)", value=1.5, step=0.1, min_value=0.1)
-plot_emax = st.sidebar.number_input("Plot max (eV)", value=5.0, step=0.1, min_value=0.1)
+# Plot emin/emax inputs MOVED TO MAIN AREA (visible like original version)
+col1, col2 = st.columns(2)
+plot_emin = col1.number_input("plot-emin (eV)", value=1.5, step=0.1, min_value=0.1)
+plot_emax = col2.number_input("plot-emax (eV)", value=5.0, step=0.1, min_value=0.1)
 
 col1, col2 = st.columns([2, 1])
 with col1:
