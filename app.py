@@ -24,7 +24,7 @@ Automatically compares **experimental UV-Vis spectra** with **TD-DFT calculation
 
 *No title row*
 
-Don't forget to apply the Jacobian conversion for experimental data! --> https://doi.org/10.1021/jz401508t
+Don't forget to apply the Jacobian conversion for experimental data! (https://doi.org/10.1021/jz401508t)
 
 
 
