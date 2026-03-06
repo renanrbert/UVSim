@@ -304,6 +304,8 @@ st.markdown("""
 ---
 **UV-Vis Similarity Calculator** • *Built from computational chemiststo to all chemists!* 
 
+Creators: Renan Ribeiro Bertoloni and Antonio Gustavo Sampaio de Oliveira Filho
+
 Check our work that used this algorithm: https://doi.org/10.1021/acs.jpca.5c06391 
 
 [GitHub](https://github.com/renanrbert/UVSim) • Optimized for ORCA .stk outputs
