@@ -43,7 +43,6 @@ def optimize_parameters_original(exp_data, stk_data, exp_emin, exp_emax):
     """EXACTLY as in original code: two-step Nelder-Mead optimization"""
     def objective(params):
         shift, width = params
-        # ✅ CORRIGIDO: exp_emin, exp_emax (não plot_emax)
         x, y = create_spectrum(stk_data, exp_emin, exp_emax, shift=shift, width=width)
         return -calculate_similarity_in_range(exp_data, x, y, exp_emin, exp_emax)
 
@@ -110,7 +109,7 @@ def normalize_transitions_in_plot_range(stk_data, plot_emin, plot_emax):
 
 # ==== STREAMLIT INTERFACE ====
 
-st.title("🔬 UV-Vis TD-DFT Spectrum Analyzer")
+st.title("UV-Vis TD-DFT Spectrum Analyzer")
 
 st.markdown("""
 **Upload your experimental UV-Vis spectrum (.csv/.dat) and theoretical TD-DFT transitions (.stk files)**  
@@ -130,8 +129,6 @@ with col1:
         type=["csv", "dat", "txt"],
         help="Format: energy(eV),intensity per line"
     )
-with col2:
-    st.info("**.stk format:**\nenergy(cm⁻¹),oscillator_strength")
 
 stk_files = st.file_uploader(
     "Theoretical TD-DFT files (.stk - multiple OK)",
