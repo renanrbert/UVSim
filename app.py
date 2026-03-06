@@ -7,7 +7,7 @@ from scipy.integrate import simpson
 from scipy.interpolate import CubicSpline
 from scipy.optimize import minimize
 
-# ==== FUNÇÕES IMPORTADAS DO SEU SCRIPT ORIGINAL ====
+# ==== FUNÇÕES IMPORTADAS DO SCRIPT ORIGINAL ====
 
 def create_spectrum(stk_data, emin=3.8, emax=5.6, delta=0.01, shift=0.0, width=0.05):
     x_ev = np.arange(emin, emax, delta)
@@ -100,9 +100,9 @@ def normalize_transitions_in_plot_range(stk_data, plot_emin, plot_emax):
 
 # ==== INTERFACE STREAMLIT ====
 
-st.title("Análise UV-Vis TD-DFT vs Experimental")
+st.title("UV-Vis Similarity Calculator")
 
-st.write("Faça upload do espectro experimental (.dat ou .csv com duas colunas) e de um ou mais arquivos .stk.")
+st.write("Upload your experimental data (.dat or .csv with two columns) and computational spectrum (.stk file)")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -110,22 +110,22 @@ with col1:
 with col2:
     plot_emax = st.number_input("plot-emax (eV)", value=5.0, step=0.1)
 
-exp_file = st.file_uploader("Arquivo experimental (.dat ou .csv)", type=["dat", "csv", "txt"])
-stk_files = st.file_uploader("Arquivos .stk (um ou vários)", type=["stk"], accept_multiple_files=True)
+exp_file = st.file_uploader("Experimental UV-Vis (.dat or .csv)", type=["dat", "csv", "txt"])
+stk_files = st.file_uploader("Calculated UV-Vis (.stk)", type=["stk"])
 
-run_button = st.button("Rodar análise")
+run_button = st.button("Run analysis")
 
 if run_button:
     if exp_file is None or len(stk_files) == 0:
-        st.error("Carregue o arquivo experimental e pelo menos um arquivo .stk.")
+        st.error("Upload the experimental data file as a .dat or .csv and the calculated spectrum as a .stk file with two columns")
     else:
         # 1. Carrega dados experimentais
         try:
             exp_data = load_and_preprocess_experimental_data(exp_file)
             exp_emin, exp_emax = np.min(exp_data[:, 0]), np.max(exp_data[:, 0])
-            st.success(f"Experimental carregado: {exp_data.shape[0]} pontos, intervalo {exp_emin:.2f}–{exp_emax:.2f} eV")
+            st.success(f"Experimental data: {exp_data.shape[0]} points, range {exp_emin:.2f}–{exp_emax:.2f} eV")
         except Exception as e:
-            st.error(f"Erro ao carregar experimental: {e}")
+            st.error(f"Error in processing experimental data: {e}")
             st.stop()
 
         results = []
@@ -154,11 +154,10 @@ if run_button:
                 similarity_percent = similarity * 100
 
                 results.append({
-                    "Funcional / Arquivo": name,
+                    "File": name,
                     "Shift (eV)": shift_opt,
                     "Width (eV)": width_opt,
-                    "Similaridade": similarity,
-                    "Similaridade (%)": similarity_percent
+                    "Similarity (%)": similarity_percent
                 })
 
                 ax = axs[idx]
@@ -182,7 +181,7 @@ if run_button:
                 ax.set_title(name, fontsize=10)
 
             except Exception as e:
-                st.error(f"Erro ao processar {name}: {e}")
+                st.error(f"Error in processing {name}: {e}")
 
         for idx in range(n_funcionais, len(axs)):
             axs[idx].set_visible(False)
@@ -192,12 +191,12 @@ if run_button:
 
         if results:
             results_df = pd.DataFrame(results)
-            st.subheader("Resultados numéricos")
+            st.subheader("Numerical results")
             st.dataframe(results_df)
 
             csv_export = results_df.to_csv(index=False).encode("utf-8")
             st.download_button(
-                label="Baixar tabela em CSV",
+                label="Download .csv table",
                 data=csv_export,
                 file_name="uvvis_results.csv",
                 mime="text/csv",
