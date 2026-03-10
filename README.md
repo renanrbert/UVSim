@@ -1,4 +1,4 @@
-The "uv_vis_analysis.py" file is a local python code for running the UV-Vis Similarity Calculator on your terminal. It is recommended to use as follow:
+The "uvvis_analysis.py" file is a local python code for running the UV-Vis Similarity Calculator on your terminal. It is recommended to use as follow:
 
 python uvvis_analysis -e experimental_data.dat -f functionals.txt -o output_name --plot-emin e_min --plot-emax e_max
 
