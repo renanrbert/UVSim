@@ -130,8 +130,6 @@ def main():
     parser = argparse.ArgumentParser(description='Comparative analysis of UV-Vis spectra for different TD-DFT functionals')
     parser.add_argument('-e', '--experimental', required=True, help='Path to experimental file (.dat)')
     parser.add_argument('-o', '--output', default='results', help='Prefix for output files')
-    parser.add_argument('-f', '--functionals', help='Path to file with list of functionals (.txt)')
-    parser.add_argument('-l', '--list', nargs='+', help='Direct list of functionals in format "NAME:path/to/file.stk"')
     parser.add_argument('-s', '--single', help='Single .stk file in the same directory as the python program')
     parser.add_argument('--plot-emin', type=float, default=1.5, help='Plot lower limit (eV)')
     parser.add_argument('--plot-emax', type=float, default=5.0, help='Plot upper limit (eV)')
