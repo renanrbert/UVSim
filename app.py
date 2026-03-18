@@ -243,8 +243,8 @@ if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
 
                 results.append({
                     "Method/File": name,
-                    "Shift (eV)": f"{shift_opt:.3f}",
-                    "Width (eV)": f"{width_opt:.3f}",
+                    "Shift (eV)": f"{shift_opt:.2f}",
+                    "Width (eV)": f"{width_opt:.2f}",
                     "Similarity (%)": f"{similarity_percent:.1f}"
                 })
 
