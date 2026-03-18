@@ -41,9 +41,7 @@ Don't forget to apply the Jacobian conversion for experimental data! (https://do
 
 Optimization range = experimental data range
 
-Step 1: Fix width=0.053 eV, optimize shift [-1.5, +1.5 eV] (The shift value **will not** be greater than this values!)
-
-Step 2: Fix optimized shift, optimize width [0, 0.5 eV] (The width value **will not** be greater than this values!)
+Optimize shift within [-1.5, -1.5 eV] and width within [0, 0.5 eV]. (The shift and width values **will not** be greater than this values!)
 
 Similarity = ∫f·g / √(∫f² · ∫g²) [0-100%]
 
@@ -307,6 +305,8 @@ st.markdown("""
 Creators: Renan Ribeiro Bertoloni and Antonio Gustavo Sampaio de Oliveira Filho
 
 Check our work that used this algorithm: Renan R. Bertoloni, Vania M. Ramos, Ana Paula de Lima Batista, and Antonio G. S. de Oliveira-Filho, "Benchmarking Structures and UV–Vis Spectra of Iron Complexes Against Experimental Data", J. Phys. Chem. A 2025, 129, 45, 10481–10495 [https://doi.org/10.1021/acs.jpca.5c06391] 
+
+Contact: antoniogsof@iqsc.usp.br 
 
 [GitHub](https://github.com/renanrbert/UVSim) • Optimized for ORCA 6.0.1 .stk outputs
 """)
