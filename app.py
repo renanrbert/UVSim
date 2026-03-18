@@ -117,6 +117,13 @@ def optimize_parameters_original(exp_data, stk_data, exp_emin, exp_emax):
         method='Nelder-Mead'
     )
 
+    # Third step: optimize both shift and width together, starting from optimized values
+    result = minimize(
+        objective, 
+        result.x,
+        bounds=((-1.5, 1.5), (0.0, 0.5)),
+        method='Nelder-Mead')
+ 
     return result.x[0], result.x[1]  # shift_opt, width_opt
 
 def load_and_preprocess_experimental_data(file_obj):
