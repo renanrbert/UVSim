@@ -311,7 +311,11 @@ st.markdown("""
 
 Creators: Renan Ribeiro Bertoloni and Antonio Gustavo Sampaio de Oliveira Filho
 
-Check our work that used this algorithm: Renan R. Bertoloni, Vania M. Ramos, Ana Paula de Lima Batista, and Antonio G. S. de Oliveira-Filho, "Benchmarking Structures and UV–Vis Spectra of Iron Complexes Against Experimental Data", J. Phys. Chem. A 2025, 129, 45, 10481–10495 [https://doi.org/10.1021/acs.jpca.5c06391] 
+Check our works that used this algorithm: 
+
+Renan R. Bertoloni, Vania M. Ramos, Ana Paula de Lima Batista, and Antonio G. S. de Oliveira-Filho, "Benchmarking Structures and UV–Vis Spectra of Iron Complexes Against Experimental Data", J. Phys. Chem. A 2025, 129, 45, 10481–10495 [https://doi.org/10.1021/acs.jpca.5c06391] 
+
+Renan R. Bertoloni and Antonio G. S. de Oliveira-Filho, "Quantitative Evaluation of TD-DFT Functionals for UV-Vis Spectroscopy in Ni and Co Complexes". ChemRxiv. [https://doi.org/10.26434/chemrxiv.15001137/v1]
 
 Contact: antoniogsof@iqsc.usp.br 
 
